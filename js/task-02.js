@@ -16,4 +16,4 @@ ingredients.forEach((ingredient) => {
   itemList.push(ingredientItem);
 });
 
-ListEl.append(itemList);
+ListEl.append(...itemList);
