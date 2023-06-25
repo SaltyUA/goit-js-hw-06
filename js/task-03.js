@@ -19,9 +19,5 @@ let newElement = "";
 const addImage = images.forEach((image) => {
   newElement += `<li><img src="${image.url}" alt="${image.alt}"></li>`;
 });
-console.log(galleryEl);
-console.log(newElement);
-galleryEl.insertAdjacentHTML(
-  "beforebegin",
-  `<ul class="gallery">${newElement}</ul>`
-);
+
+galleryEl.insertAdjacentHTML("afterbegin", newElement);
