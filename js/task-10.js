@@ -11,21 +11,25 @@ const refs = {
   destroyBtn: document.querySelector(`#controls > button[data-destroy]`),
   boxes: document.querySelector(`#boxes`),
 };
+console.log(refs.input.min);
 
 refs.createBtn.addEventListener(`click`, createBoxes);
 refs.destroyBtn.addEventListener(`click`, destroyBoxes);
 function createBoxes() {
   const value = refs.input.value;
 
-  if (refs.input.value > 100) {
-    alert(`Не більше 100`);
+  if (
+    refs.input.value > Number(refs.input.max) ||
+    refs.input.value < Number(refs.input.min)
+  ) {
+    alert(`Значення від 1 до 100`);
     refs.input.value = 100;
     return;
   }
 
   const boxes = [];
 
-  for (let i = 0; i < value; ++i) {
+  for (let i = 0; i < value; i += Number(refs.input.step)) {
     const box = document.createElement(`div`);
     box.style.height = `${30 + i * 10}px`;
     box.style.width = `${30 + i * 10}px`;
@@ -33,11 +37,10 @@ function createBoxes() {
     boxes.push(box);
   }
 
-  refs.boxes.prepend(...boxes);
+  refs.boxes.append(...boxes);
 }
 
 function destroyBoxes() {
-  while (refs.boxes.childNodes.length !== 0) {
-    refs.boxes.firstElementChild.remove();
-  }
+  refs.boxes.innerHTML = "";
+  refs.input.value = "";
 }
